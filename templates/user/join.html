@@ -74,7 +74,7 @@ flex-direction: row; align-items: center; justify-content: center">
 
 <!--javascript-->
 <script>
-    $('button_join').on('click',()=>{
+    $('#button_join').on('click',()=>{
         console.log('클릭..');
         let email=$('#floatingEmail').val();
         let name=$('#floatingName').val();
@@ -83,7 +83,7 @@ flex-direction: row; align-items: center; justify-content: center">
         console.log('이메일: '+email+', 이름: '+name+', 사용자 이름:' +user_id+', 비밀번호:'+password);
 
         $.ajax({
-            url:"/user/join",
+            url:"/user/join/",
             data:{
                 email:email,
                 password:password,
