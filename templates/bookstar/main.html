@@ -260,8 +260,8 @@
             <span class="material-icons">home</span>
             <span class="material-icons">send</span>
             <span id="add_feed" class="material-icons-outlined">add_box</span>
-            <span class="material-icons-outlined">explore</span>
-            <span class="material-icons-outlined">favorite_border</span>
+            <span id="login" class="material-icons-outlined">explore</span>
+            <span id="join" class="material-icons-outlined">favorite_border</span>
           </div>
       </div>
     </nav>
@@ -481,6 +481,19 @@
 
   <!--javascript-->
     <script>
+        //로그인
+        const buttonLogin=document.getElementById("login");
+        buttonLogin.addEventListener("click",e=>{
+            window.location.href="/user/login/";
+        })
+
+        //회원가입
+        const buttonJoin=document.getElementById("join");
+        buttonJoin.addEventListener("click",e=>{
+            window.location.href="/user/join/";
+        })
+
+
         //모달 띄우기
         const modal=document.getElementById("modal_add_feed");
         const buttonAddFeed=document.getElementById("add_feed");
@@ -504,8 +517,6 @@
                 closeModal();
             });
         });
-
-
 
 
         //jquery
