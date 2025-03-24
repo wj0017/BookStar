@@ -253,15 +253,15 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
     style="width:100%; height:50px; position:fixed;">
       <div class="container-fluid">
-          <img style="height: 30px; object-fit: contain" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
+          <img style="height: 30px; object-fit: contain" src="https://cdn-icons-png.flaticon.com/512/864/864685.png">
           <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
 
           <div>
             <span class="material-icons">home</span>
-            <span class="material-icons">send</span>
+            <span id="book_rec" class="material-icons">send</span>
             <span id="add_feed" class="material-icons-outlined">add_box</span>
-            <span id="login" class="material-icons-outlined">explore</span>
-            <span id="join" class="material-icons-outlined">favorite_border</span>
+            <span id="login" class="material-icons-outlined">login</span>
+            <span id="join" class="material-icons-outlined">person</span>
           </div>
       </div>
     </nav>
@@ -286,16 +286,24 @@
 
                <!--feed_icon-->
                <div class="feed_icon">
-                   <div>
-                       <span class="material-icons-outlined">
+                   <div style="display: flex; align-items: center;">
+                       <span class="material-icons-outlined" >
                            favorite_border
                        </span>
+                        <!--feed_like-->
+                       <div class="feed_like">
+                           <p class="feed_txt" style="margin: -5px; line-height: 1;">
+                               <b>좋아요 {{ feed.like_count }} </b>
+                           </p>
+                       </div>
+                       <!--
                        <span class="material-icons-outlined">
                            mode_comment
                        </span>
                        <span class="material-icons-outlined">
                            send
                        </span>
+                       -->
                    </div>
                    <div>
                        <span class="material-icons-outlined">
@@ -304,21 +312,17 @@
                    </div>
                </div>
 
-               <!--feed_like-->
-               <div class="feed_like">
-                   <p class="feed_txt"> <b>좋아요 {{ feed.like_count }} </b> </p>
-               </div>
-
                <!--게시물-->
-               <div class="feed_content">
+               <div class="feed_content" style="margin-top: 10px">
                 <p class="feed_txt"> <b> {{ feed.user_id }} </b> {{ feed.content }} </p>
                 </div>
 
-               <!--feed_reply-->
+               <!--feed_reply
                <div class="feed_reply">
                    <span class="feed_txt"> <b> mychew </b> 링크 올려주세요 </span>
                    <span class="feed_txt"> <b> soup </b> 링크.</span>
                </div>
+               -->
            </div>
             {% endfor %}
         </div>
@@ -481,6 +485,12 @@
 
   <!--javascript-->
     <script>
+        //책 추천
+        const buttonRec=document.getElementById("book_rec");
+        buttonRec.addEventListener("click",e=>{
+            window.location.href="/book/";
+        })
+
         //로그인
         const buttonLogin=document.getElementById("login");
         buttonLogin.addEventListener("click",e=>{

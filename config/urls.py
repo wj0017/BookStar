@@ -25,6 +25,7 @@ urlpatterns = [
     path('',Main.as_view(),name='main'),
     path('content/upload',UploadFeed.as_view()),
     path('user/',include('user.urls')),
+    path('book/',include('book.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
