@@ -34,7 +34,6 @@ class Login(APIView):
 
         return Response(status=200, data=dict(message='로그인 성공.'))
 
-
 class Join(APIView):
     def get(self, request):
         return render(request, 'user/join.html')
