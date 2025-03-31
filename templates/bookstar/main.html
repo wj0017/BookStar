@@ -251,16 +251,18 @@
   <body>
     <!--상단 네비게이션 바-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
-    style="width:100%; height:50px; position:fixed;">
+    style="width:100%; height:auto; min-height:50px; position:fixed; top:0; z-index:1000;">
       <div class="container-fluid">
-          <img style="height: 30px; object-fit: contain" src="https://cdn-icons-png.flaticon.com/512/864/864685.png">
+          <a href="/" class="navbar-brand">
+            <img style="height: 30px; object-fit: contain" src="https://cdn-icons-png.flaticon.com/512/864/864685.png">
+          </a>
           <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
 
-          <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center">
+          <div class="navbar-nav-items" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center">
               <span id="add_feed" style="cursor: pointer; white-space: nowrap;">새 게시물</span>
-              <span id="book_rec" style="cursor: pointer; white-space: nowrap;">도서 추천</span>
-              <span id="login" style="cursor: pointer; white-space: nowrap;">로그인</span>
-              <span id="join" style="cursor: pointer; white-space: nowrap;">회원가입</span>
+              <a href="/book/recommendation/" class="nav-link" id="book_rec" style="cursor: pointer; white-space: nowrap; text-decoration: none; color: inherit;">도서 추천</a>
+              <a href="/user/login/" class="nav-link" id="login" style="cursor: pointer; white-space: nowrap; text-decoration: none; color: inherit;">로그인</a>
+              <a href="/user/join/" class="nav-link" id="join" style="cursor: pointer; white-space: nowrap; text-decoration: none; color: inherit;">회원가입</a>
 
               <div class="dropdown">
                 <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
@@ -271,15 +273,35 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end" style="margin-top: 5px;">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="/user/profile/">프로필</a></li>
+                  <li><a class="dropdown-item" href="/user/settings/">설정</a></li>
+                  <li><a class="dropdown-item" href="/user/logout/">로그아웃</a></li>
                 </ul>
               </div>
           </div>
       </div>
     </nav>
 
+    <style>
+      /* 링크 스타일 */
+      .nav-link:hover {
+        color: #0d6efd !important;
+      }
+
+      /* 반응형 스타일 */
+      @media (max-width: 768px) {
+        .navbar-nav-items {
+          margin-top: 10px;
+          width: 100%;
+          justify-content: center;
+        }
+
+        .navbar .container-fluid {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+      }
+    </style>
     <!--main body-->
     <div class="main_body">
         <!--왼쪽 네비게이션 바-->
