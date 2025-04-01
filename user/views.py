@@ -8,6 +8,10 @@ from uuid import uuid4
 from config.settings import MEDIA_ROOT
 from django.shortcuts import redirect
 
+
+def profile_view(request):
+    return render(request, 'user/profile.html')
+
 class Login(APIView):
     def get(self, request):
         return render(request, 'user/login.html')
