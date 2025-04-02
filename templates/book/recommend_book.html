@@ -18,32 +18,51 @@
 </head>
 
 <style>
-  .main_body {
-      display:flex;
+   .main_body {
       flex-direction: column;
-      justify-content: center;
-      padding-top:50px;
-  }
+      display: flex;
+      width: 100%;
+      height: 900px;
+      margin: 0 auto;
+      align-items: center;
+      padding-top:70px;
+      background-color: #efefef;
+   }
+
+   .left_body {
+          background-color: #ffffff;
+          margin-right: 100px;
+          width: 800px;
+          height: 2000px;
+          display: flex;
+          padding-top: 50px;
+          flex-direction: column;
+          align-items: center;
+      }
 
   .button{
-      padding: 12px 24px;
-      background-color: #f4d090;
+      width: 400px;
+      height: 50px;
+      background-color: #ffffff;
       color: #555454;
       font-size: 16px;
+      border-color: #e1e1e1;
       cursor: pointer;
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
   .button:hover{
-      background-color: antiquewhite;
+      background-color: #ededed;
   }
 
   .box {
       display: none;
       width: 100%;
-      height: 500px;
+      height: 700px;
       margin-top: 20px;
+      background-color: #c3c3c3;
   }
+
 
 </style>
 
@@ -57,25 +76,27 @@
 
           <div>
             <span id="home" class="material-icons" style="cursor: pointer;">home</span>
+            <!--
             <span id="login" class="material-icons-outlined">login</span>
             <span id="join" class="material-icons-outlined">person</span>
+            -->
           </div>
       </div>
     </nav>
 
-    <div class="main_body" style="align-items: center;">
+    <div class="main_body">
+    <div class="left_body">
+        <h1 style="margin-bottom: 30px; color: #504f4f; font-weight: bold;">도서 추천 페이지</h1>
 
-        <h1 style="margin-top: 20px; margin-bottom: 30px; color: #504f4f">도서 추천 페이지</h1>
-
-        <div style="display: flex; gap: 200px; align-items: center;">
+        <div style="display: flex; gap: 0px; align-items: center;">
             <button class="button" id="btn1">추천 책 보기</button>
             <button class="button" id="btn2">새로운 책 보기</button>
         </div>
 
         <!--관련 추천 도서-->
-        <div class="box" id="box1" style="background-color: antiquewhite"></div>
+        <div class="box" id="box1"></div>
         <!--관련되지 않은 추천 도서-->
-        <div class="box" id="box2" style="background-color: #cfbfa8"></div>
+        <div class="box" id="box2"></div>
 
     <script>
         const btn1 = document.getElementById("btn1");
@@ -101,6 +122,7 @@
         });
 
     </script>
+    </div>
     </div>
 </body>
 </html>
