@@ -5,6 +5,7 @@ from rest_framework.response import Response
 import os
 from .settings import MEDIA_ROOT
 from uuid import uuid4
+from django.db.models import Q
 
 class Main(APIView):
     def get(self,request):
@@ -28,3 +29,14 @@ class UploadFeed(APIView):
         Feed.objects.create(content=content, image=image, profile_image=profile_image, user_id=user_id, like_count=0)
 
         return Response(status=200)
+
+def feed_search(request):
+    query = request.GET.get('q', '')
+    feeds = Feed.objects.filter(
+        Q(content__icontains=query) | Q(user_id__icontains=query)
+    ) if query else []
+
+    return render(request, 'bookstar/search_result.html', {
+        'query': query,
+        'feeds': feeds
+    })

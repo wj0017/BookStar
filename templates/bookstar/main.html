@@ -244,7 +244,6 @@
           width: 294px;
           border:none;
       }
-
   </style>
 
 
@@ -256,7 +255,14 @@
           <a href="/" class="navbar-brand">
             <img style="height: 30px; object-fit: contain" src="https://cdn-icons-png.flaticon.com/512/864/864685.png">
           </a>
-          <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+
+          <!--피드 검색
+          <input class="form-control" style="width: 200px" name="q" type="search" placeholder="Search" aria-label="Search">
+            -->
+            <div style="display: flex; gap: 5px; align-items: center;">
+            <input id="searchBox" class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary" onclick="search()">검색</button>
+            </div>
 
           <div class="navbar-nav-items" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center">
               <span id="add_feed" style="cursor: pointer; white-space: nowrap;">새 게시물</span>
@@ -663,6 +669,11 @@
         buttonJoin.addEventListener("click",e=>{
             window.location.href="/user/join/";
         })
+
+        function search() {
+        const keyword = document.getElementById("searchBox").value;
+        window.location.href = `/search/?q=${encodeURIComponent(keyword)}`;
+        }
 
     </script>
 
