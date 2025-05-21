@@ -44,6 +44,13 @@ INSTALLED_APPS = [
     "content",
     "user",
     "book",
+    "follow",
+    "like",
+    "comment",
+    "review",
+    "notification",
+    "hashtag",
+    
 ]
 
 MIDDLEWARE = [
