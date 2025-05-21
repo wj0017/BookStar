@@ -1,16 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token 메타 태그 -->
-    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
 
     <!--bootstrap css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-          crossorigin="anonymous">
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -19,32 +16,33 @@
 </head>
 
 <style>
-    .floating_form {
+    .floating_form{
         margin: 0px 30px;
     }
 
-    .floating_label {
-        margin-top: -4px;
-        font-size: 14px;
+    .floating_label{
+        margin-top:-4px;
+        font-size:14px;
     }
 
-    .floating_input {
-        height: 50px !important;
-        padding-top: 20px !important;
-        font-size: 14px !important;
+    .floating_input{
+        height: 50px; !important;
+        padding-top:20px !important;
+        font-size: 14px; !important;
     }
 </style>
 
-<body style="background-color: #8f8f8f; height: 100%">
-<div style="font-size: 14px; text-align: center; width: 100%; min-height: 100vh; display: flex; flex-direction: row; align-items: center; justify-content: center">
+<body style="background-color: #8f8f8f;height: 100%">
+<div style="font-size: 14px;text-align: center;width: 100%;min-height: 100vh;display: flex; flex-direction: row; align-items: center; justify-content: center">
     <div>
         <div class="mb-3" style="background-color: white; width: 350px; height: 380px; border: 1px solid rgba(0, 0, 0, 0.18);">
-            <div style="display: flex; align-items: center; justify-content: center">
+            <div style="display: flex;align-items: center;justify-content: center">
                 <img style="height: 50px; object-fit: contain; margin: 30px 0"
-                     src="https://cdn-icons-png.flaticon.com/512/864/864685.png" alt="BookStar Logo">
+                     src="https://cdn-icons-png.flaticon.com/512/864/864685.png">
             </div>
             <div class="form-floating mb-2 floating_form">
-                <input type="email" class="floating_input form-control" id="floatingEmail" placeholder="name@example.com">
+                <input type="email" class="floating_input form-control" id="floatingEmail"
+                       placeholder="name@example.com">
                 <label for="floatingEmail" class="floating_label">이메일 주소</label>
             </div>
             <div class="form-floating mb-3 floating_form">
@@ -63,35 +61,8 @@
     </div>
 </div>
 
-<!-- CSRF 토큰 쿠키에서 가져오는 함수 및 AJAX 헤더 설정 -->
 <script>
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // 쿠키 이름 확인
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-    const csrftoken = getCookie('csrftoken');
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!(/^GET|HEAD|OPTIONS|TRACE$/i.test(settings.type)) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-    $('#button_login').on('click', () => {
+    $('#button_login').on('click', ()=>{
         let email = $('#floatingEmail').val();
         let password = $('#floatingPassword').val();
 
@@ -103,10 +74,10 @@
             },
             method: "POST",
             dataType: "json",
-            success: function(data) {
-                location.replace('{% url "main" %}');
+            success: function (data){
+                location.replace('{% url 'main' %}');
             },
-            error: function(request, status, error) {
+            error:function (request, status, error){
                 let data = JSON.parse(request.responseText);
                 console.log(data.message);
                 alert(data.message);
@@ -115,7 +86,6 @@
     });
 </script>
 
-<!-- bootstrap js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
