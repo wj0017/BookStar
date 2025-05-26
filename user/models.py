@@ -41,3 +41,16 @@ class User(AbstractBaseUser, PermissionsMixin):  # 🔥 관리자 권한 위한 
 
     class Meta:
         db_table = 'users'
+
+class UserPreference(models.Model):
+    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='preference')
+    genres = models.JSONField(default=list)
+    goals = models.JSONField(default=list)
+    reading_time = models.CharField(max_length=50, blank=True)
+    reading_duration = models.CharField(max_length=50, blank=True)
+    reading_complexity = models.CharField(max_length=50, blank=True)
+    favorite_books = models.JSONField(default=list)
+    mood = models.JSONField(default=list)
+    onboarding_completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

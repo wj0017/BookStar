@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStar - 개인화 설정</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-2px);
+        }
+        .selected {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .progress-fill {
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 헤더 -->
+        <div class="text-center mb-8">
+            <div class="flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z"></path>
+                </svg>
+                <h1 class="text-3xl font-bold text-gray-800">BookStar</h1>
+            </div>
+            <p class="text-gray-600">당신만을 위한 완벽한 책 추천을 준비하고 있어요</p>
+        </div>
+
+        <!-- 진행도 표시 -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-500">단계 <span id="current-step">1</span> / 5</span>
+                <span class="text-sm text-gray-500"><span id="progress-percent">20</span>%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full progress-fill" style="width: 20%"></div>
+            </div>
+        </div>
+
+        <!-- 메인 컨텐츠 -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <!-- Step 1: 장르 선호도 -->
+            <div id="step-1" class="step-content">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">어떤 장르를 좋아하시나요?</h2>
+                    <p class="text-gray-600">관심있는 장르를 모두 선택해주세요</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-genre="fiction">
+                        <div class="text-2xl mb-2">📚</div>
+                        <div class="text-sm font-medium">소설</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-purple-300 hover:bg-purple-50" data-genre="mystery">
+                        <div class="text-2xl mb-2">🔍</div>
+                        <div class="text-sm font-medium">추리/미스터리</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-pink-300 hover:bg-pink-50" data-genre="romance">
+                        <div class="text-2xl mb-2">💕</div>
+                        <div class="text-sm font-medium">로맨스</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50" data-genre="fantasy">
+                        <div class="text-2xl mb-2">🧙‍♀️</div>
+                        <div class="text-sm font-medium">판타지</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-cyan-300 hover:bg-cyan-50" data-genre="scifi">
+                        <div class="text-2xl mb-2">🚀</div>
+                        <div class="text-sm font-medium">SF</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-gray-400 hover:bg-gray-50" data-genre="horror">
+                        <div class="text-2xl mb-2">👻</div>
+                        <div class="text-sm font-medium">공포/스릴러</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50" data-genre="biography">
+                        <div class="text-2xl mb-2">👤</div>
+                        <div class="text-sm font-medium">자서전/전기</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-amber-300 hover:bg-amber-50" data-genre="history">
+                        <div class="text-2xl mb-2">🏛️</div>
+                        <div class="text-sm font-medium">역사</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-teal-300 hover:bg-teal-50" data-genre="science">
+                        <div class="text-2xl mb-2">🔬</div>
+                        <div class="text-sm font-medium">과학</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-orange-300 hover:bg-orange-50" data-genre="selfhelp">
+                        <div class="text-2xl mb-2">📈</div>
+                        <div class="text-sm font-medium">자기계발</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-slate-400 hover:bg-slate-50" data-genre="business">
+                        <div class="text-2xl mb-2">💼</div>
+                        <div class="text-sm font-medium">경영/비즈니스</div>
+                    </button>
+                    <button class="genre-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-violet-300 hover:bg-violet-50" data-genre="philosophy">
+                        <div class="text-2xl mb-2">🤔</div>
+                        <div class="text-sm font-medium">철학</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: 독서 목표 -->
+            <div id="step-2" class="step-content hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">독서 목표가 있으신가요?</h2>
+                    <p class="text-gray-600">올해의 독서 계획을 알려주세요</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button class="goal-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 flex items-center space-x-3" data-goal="quantity">
+                        <div class="text-blue-600">⚡</div>
+                        <span class="font-medium">많이 읽기 (월 3권 이상)</span>
+                    </button>
+                    <button class="goal-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 flex items-center space-x-3" data-goal="quality">
+                        <div class="text-blue-600">⭐</div>
+                        <span class="font-medium">깊이 있게 읽기</span>
+                    </button>
+                    <button class="goal-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 flex items-center space-x-3" data-goal="classic">
+                        <div class="text-blue-600">📚</div>
+                        <span class="font-medium">고전 명작 도전</span>
+                    </button>
+                    <button class="goal-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 flex items-center space-x-3" data-goal="newrelease">
+                        <div class="text-blue-600">🕐</div>
+                        <span class="font-medium">신간 빠르게 읽기</span>
+                    </button>
+                    <button class="goal-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 flex items-center space-x-3" data-goal="social">
+                        <div class="text-blue-600">👥</div>
+                        <span class="font-medium">독서 모임 참여</span>
+                    </button>
+                    <button class="goal-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 flex items-center space-x-3" data-goal="casual">
+                        <div class="text-blue-600">❤️</div>
+                        <span class="font-medium">가벼운 취미 독서</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: 독서 습관 -->
+            <div id="step-3" class="step-content hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">독서 습관을 알려주세요</h2>
+                    <p class="text-gray-600">평소 독서 패턴을 선택해주세요</p>
+                </div>
+                <div class="space-y-8">
+                    <div class="space-y-3">
+                        <h4 class="font-medium text-gray-700">주로 언제 책을 읽으시나요?</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <button class="time-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-time="morning">아침 시간</button>
+                            <button class="time-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-time="commute">출퇴근길</button>
+                            <button class="time-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-time="evening">저녁 시간</button>
+                            <button class="time-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-time="weekend">주말</button>
+                            <button class="time-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-time="bedtime">잠들기 전</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-medium text-gray-700">한 번에 얼마나 읽으시나요?</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <button class="duration-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-duration="short">15-30분</button>
+                            <button class="duration-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-duration="medium">30분-1시간</button>
+                            <button class="duration-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-duration="long">1-2시간</button>
+                            <button class="duration-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-duration="marathon">2시간 이상</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-medium text-gray-700">어떤 복잡도를 선호하시나요?</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <button class="complexity-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-complexity="light">가볍고 편안한</button>
+                            <button class="complexity-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-complexity="moderate">적당한 깊이</button>
+                            <button class="complexity-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-complexity="deep">깊이 있고 복잡한</button>
+                            <button class="complexity-btn step-card p-3 rounded-lg border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50 text-left" data-complexity="mixed">상황에 따라 다름</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: 좋아한 책 -->
+            <div id="step-4" class="step-content hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">최근 인상깊게 읽은 책이 있나요?</h2>
+                    <p class="text-gray-600">비슷한 스타일의 책을 추천해드릴게요</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="book-suggestions">
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="미움받을 용기">미움받을 용기</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="1984">1984</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="해리포터">해리포터</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="반지의 제왕">반지의 제왕</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="호밀밭의 파수꾼">호밀밭의 파수꾼</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="데미안">데미안</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="어린왕자">어린왕자</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="나미야 잡화점의 기적">나미야 잡화점의 기적</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="82년생 김지영">82년생 김지영</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="정의란 무엇인가">정의란 무엇인가</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="사피엔스">사피엔스</button>
+                        <button class="book-btn step-card p-3 text-sm rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-book="아몬드">아몬드</button>
+                    </div>
+
+                    <div id="selected-books" class="space-y-3 hidden">
+                        <h4 class="font-medium text-gray-700">선택한 책들:</h4>
+                        <div id="selected-books-list" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: 분위기 -->
+            <div id="step-5" class="step-content hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">어떤 분위기의 책을 원하시나요?</h2>
+                    <p class="text-gray-600">현재 읽고 싶은 책의 느낌을 선택해주세요</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <button class="mood-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-rose-300 hover:bg-rose-50" data-mood="healing">
+                        <div class="text-2xl mb-2">🌸</div>
+                        <div class="text-sm font-medium">힐링되는</div>
+                    </button>
+                    <button class="mood-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-yellow-300 hover:bg-yellow-50" data-mood="exciting">
+                        <div class="text-2xl mb-2">⚡</div>
+                        <div class="text-sm font-medium">흥미진진한</div>
+                    </button>
+                    <button class="mood-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50" data-mood="thoughtful">
+                        <div class="text-2xl mb-2">💭</div>
+                        <div class="text-sm font-medium">생각해볼거리가 있는</div>
+                    </button>
+                    <button class="mood-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-purple-300 hover:bg-purple-50" data-mood="emotional">
+                        <div class="text-2xl mb-2">🥹</div>
+                        <div class="text-sm font-medium">감동적인</div>
+                    </button>
+                    <button class="mood-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-green-300 hover:bg-green-50" data-mood="funny">
+                        <div class="text-2xl mb-2">😄</div>
+                        <div class="text-sm font-medium">유머러스한</div>
+                    </button>
+                    <button class="mood-btn step-card p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50" data-mood="mysterious">
+                        <div class="text-2xl mb-2">🌙</div>
+                        <div class="text-sm font-medium">신비로운</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 네비게이션 버튼 -->
+        <div class="flex justify-between items-center">
+            <button id="prev-btn" class="flex items-center space-x-2 px-6 py-3 rounded-xl border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200" disabled>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>이전</span>
+            </button>
+
+            <div class="flex space-x-2">
+                <div class="w-2 h-2 rounded-full bg-blue-500 step-indicator" data-step="1"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300 step-indicator" data-step="2"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300 step-indicator" data-step="3"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300 step-indicator" data-step="4"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300 step-indicator" data-step="5"></div>
+            </div>
+
+            <button id="next-btn" class="flex items-center space-x-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl" disabled>
+                <span id="next-text">다음</span>
+                <svg id="next-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 상태 관리
+        let currentStep = 1;
+        const preferences = {
+            genres: [],
+            goals: [],
+            readingTime: '',
+            readingDuration: '',
+            readingComplexity: '',
+            favoriteBooks: [],
+            mood: []
+        };
+
+        // DOM 요소
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const nextText = document.getElementById('next-text');
+        const nextIcon = document.getElementById('next-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const currentStepSpan = document.getElementById('current-step');
+        const progressPercent = document.getElementById('progress-percent');
+
+        // 버튼 이벤트 리스너
+        document.addEventListener('DOMContentLoaded', function() {
+            // 장르 선택
+            document.querySelectorAll('.genre-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const genre = this.dataset.genre;
+                    if (preferences.genres.includes(genre)) {
+                        preferences.genres = preferences.genres.filter(g => g !== genre);
+                        this.classList.remove('selected');
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    } else {
+                        preferences.genres.push(genre);
+                        this.classList.add('selected');
+                    }
+                    updateNextButton();
+                });
+            });
+
+            // 목표 선택
+            document.querySelectorAll('.goal-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const goal = this.dataset.goal;
+                    if (preferences.goals.includes(goal)) {
+                        preferences.goals = preferences.goals.filter(g => g !== goal);
+                        this.classList.remove('selected');
+                    } else {
+                        preferences.goals.push(goal);
+                        this.classList.add('selected');
+                    }
+                    updateNextButton();
+                });
+            });
+
+            // 독서 시간 선택
+            document.querySelectorAll('.time-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    preferences.readingTime = this.dataset.time;
+                    updateNextButton();
+                });
+            });
+
+            // 독서 지속시간 선택
+            document.querySelectorAll('.duration-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.duration-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    preferences.readingDuration = this.dataset.duration;
+                    updateNextButton();
+                });
+            });
+
+            // 복잡도 선택
+            document.querySelectorAll('.complexity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.complexity-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    preferences.readingComplexity = this.dataset.complexity;
+                    updateNextButton();
+                });
+            });
+
+            // 책 선택
+            document.querySelectorAll('.book-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const book = this.dataset.book;
+                    if (!preferences.favoriteBooks.includes(book)) {
+                        preferences.favoriteBooks.push(book);
+                        updateSelectedBooks();
+                    }
+                    updateNextButton();
+                });
+            });
+
+            // 분위기 선택
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mood = this.dataset.mood;
+                    if (preferences.mood.includes(mood)) {
+                        preferences.mood = preferences.mood.filter(m => m !== mood);
+                        this.classList.remove('selected');
+                    } else {
+                        preferences.mood.push(mood);
+                        this.classList.add('selected');
+                    }
+                    updateNextButton();
+                });
+            });
+
+            // 네비게이션 버튼
+            prevBtn.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                    updateNavigation();
+                }
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (currentStep < 5) {
+                    currentStep++;
+                    showStep(currentStep);
+                    updateNavigation();
+                } else {
+                    completeOnboarding();
+                }
+            });
+        });
+
+        // 선택된 책 업데이트
+        function updateSelectedBooks() {
+            const selectedBooksDiv = document.getElementById('selected-books');
+            const selectedBooksList = document.getElementById('selected-books-list');
+
+            if (preferences.favoriteBooks.length > 0) {
+                selectedBooksDiv.classList.remove('hidden');
+                selectedBooksList.innerHTML = preferences.favoriteBooks.map(book =>
+                    `<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm cursor-pointer hover:bg-blue-200 transition-colors" onclick="removeBook('${book}')">${book} ✕</span>`
+                ).join('');
+            } else {
+                selectedBooksDiv.classList.add('hidden');
+            }
+        }
+
+        // 책 제거
+        function removeBook(book) {
+            preferences.favoriteBooks = preferences.favoriteBooks.filter(b => b !== book);
+            updateSelectedBooks();
+            updateNextButton();
+        }
+
+        // 단계 표시
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach((content, index) => {
+                if (index + 1 === step) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+
+            // 진행도 업데이트
+            const progress = (step / 5) * 100;
+            progressBar.style.width = progress + '%';
+            currentStepSpan.textContent = step;
+            progressPercent.textContent = Math.round(progress);
+
+            // 단계 표시기 업데이트
+            document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+                if (index + 1 <= step) {
+                    indicator.classList.remove('bg-gray-300');
+                    indicator.classList.add('bg-blue-500');
+                } else {
+                    indicator.classList.remove('bg-blue-500');
+                    indicator.classList.add('bg-gray-300');
+                }
+            });
+        }
+
+        // 네비게이션 업데이트
+        function updateNavigation() {
+            // 이전 버튼
+            prevBtn.disabled = currentStep === 1;
+
+            // 다음 버튼 텍스트 변경
+            if (currentStep === 5) {
+                nextText.textContent = '추천 시작하기';
+                nextIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>';
+            } else {
+                nextText.textContent = '다음';
+                nextIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>';
+            }
+
+            updateNextButton();
+        }
+
+        // 다음 버튼 활성화 상태 업데이트
+        function updateNextButton() {
+            let canProceed = false;
+
+            switch (currentStep) {
+                case 1:
+                    canProceed = preferences.genres.length > 0;
+                    break;
+                case 2:
+                    canProceed = preferences.goals.length > 0;
+                    break;
+                case 3:
+                    canProceed = preferences.readingTime && preferences.readingDuration && preferences.readingComplexity;
+                    break;
+                case 4:
+                    canProceed = true; // 선택사항
+                    break;
+                case 5:
+                    canProceed = preferences.mood.length > 0;
+                    break;
+            }
+
+            nextBtn.disabled = !canProceed;
+        }
+
+        // 온보딩 완료
+        function completeOnboarding() {
+            // CSRF 토큰 가져오기 (Django에서 필요)
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+
+            // 서버로 데이터 전송
+            fetch('/user/onboarding/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken || ''
+                },
+                body: JSON.stringify(preferences)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 성공 시 메인 페이지로 리다이렉트
+                    window.location.href = '/';
+                } else {
+                    alert('설정 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('설정 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
+            });
+
+            console.log('사용자 선호도:', preferences);
+        }
+
+        // 초기화
+        updateNextButton();
+    </script>
+
+    <!-- CSRF 토큰 (Django에서 필요) -->
+    {% csrf_token %}
+</body>
+</html>
